@@ -15,7 +15,6 @@
 
     body {
       font-family: 'Montserrat', sans-serif;
-      background: radial-gradient(circle at center, #2b1055 0%, #7597de 500%), #0f0c20;
       background: linear-gradient(135deg, #0f0c20 0%, #2a0826 50%, #150016 100%);
       min-height: 100vh;
       display: flex;
@@ -33,7 +32,7 @@
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 215, 0, 0.2);
-      padding: 45px 30px;
+      padding: 40px 25px;
       border-radius: 30px;
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(230, 57, 114, 0.2);
       max-width: 480px;
@@ -64,7 +63,7 @@
       border-radius: 50px;
       cursor: pointer;
       box-shadow: 0 0 20px rgba(255, 42, 109, 0.4);
-      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      transition: all 0.3s ease;
       outline: none;
     }
 
@@ -72,10 +71,6 @@
       transform: translateY(-3px) scale(1.02);
       box-shadow: 0 0 30px rgba(255, 42, 109, 0.7), 0 0 10px rgba(255, 215, 0, 0.5);
       border-color: #ffd700;
-    }
-
-    .btn-gold:active {
-      transform: translateY(1px);
     }
 
     /* Message d'amour */
@@ -93,7 +88,6 @@
       -webkit-text-fill-color: transparent;
       margin-bottom: 30px;
       line-height: 1.4;
-      text-shadow: 0 0 20px rgba(255, 179, 198, 0.3);
     }
 
     /* Lecteur Vidéo */
@@ -105,7 +99,7 @@
 
     video {
       width: 100%;
-      max-height: 480px;
+      max-height: 520px;
       border-radius: 20px;
       border: 1px solid rgba(255, 215, 0, 0.3);
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 42, 109, 0.3);
@@ -117,7 +111,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Particules lumineuses (Cœurs & Étoiles) */
+    /* Particules lumineuses */
     .particle {
       position: absolute;
       pointer-events: none;
@@ -127,36 +121,34 @@
     }
 
     @keyframes float {
-      0% {
-        transform: translateY(100vh) rotate(0deg) scale(0.6);
-        opacity: 0;
-      }
+      0% { transform: translateY(100vh) rotate(0deg) scale(0.6); opacity: 0; }
       20% { opacity: 0.8; }
       80% { opacity: 0.8; }
-      100% {
-        transform: translateY(-10vh) rotate(360deg) scale(1.2);
-        opacity: 0;
-      }
+      100% { transform: translateY(-10vh) rotate(360deg) scale(1.2); opacity: 0; }
     }
   </style>
 </head>
 <body>
 
   <div class="card">
+    <!-- Étape 1 -->
     <div id="intro-section">
       <h1>Un secret pour toi... ✨</h1>
       <button class="btn-gold" onclick="showLoveMessage()">Découvrir ❤️</button>
     </div>
 
+    <!-- Étape 2 -->
     <div id="love-message-section">
       <p class="love-phrase">Phrase d’Amour du jour</p>
       <button class="btn-gold" id="start-btn" onclick="startVideo()">▶ START</button>
     </div>
 
+    <!-- Étape 3 -->
     <div id="video-container">
       <video id="myVideo" controls playsinline preload="auto">
-        <source src="IMG_4301(1).mp4" type="video/mp4">
-        Votre navigateur ne supporte pas la lecture vidéo.
+        <!-- Remplace video.mp4 par le chemin ou l'URL directe de ta vidéo -->
+        <source src="video.mp4" type="video/mp4">
+        Votre navigateur ne supporte pas la lecture de cette vidéo.
       </video>
     </div>
   </div>
@@ -173,12 +165,11 @@
       const video = document.getElementById('myVideo');
       
       videoContainer.style.display = 'block';
-      video.play().catch(err => console.log("Lecture auto bloquée"));
+      video.play().catch(err => console.log("Lecture manuelle requise"));
     }
 
-    // Générateur d'ambiance lumineuse (Cœurs et Étoiles)
+    // Générateur d'étoiles et cœurs
     const symbols = ['✨', '💖', '💫', '🌹', '✦'];
-    
     function createParticle() {
       const particle = document.createElement('div');
       particle.classList.add('particle');
