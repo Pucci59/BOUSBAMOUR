@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phrase d'Amour du Jour ✨</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: radial-gradient(circle at center, #2b1055 0%, #7597de 500%), #0f0c20;
+      background: linear-gradient(135deg, #0f0c20 0%, #2a0826 50%, #150016 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    /* Carte en verre dépoli (Glassmorphism) */
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 215, 0, 0.2);
+      padding: 45px 30px;
+      border-radius: 30px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(230, 57, 114, 0.2);
+      max-width: 480px;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.8rem;
+      color: #ffd700;
+      margin-bottom: 25px;
+      letter-spacing: 1px;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    }
+
+    /* Bouton d'action élégant */
+    .btn-gold {
+      background: linear-gradient(135deg, #ff2a6d 0%, #9a0036 100%);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 16px 36px;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(255, 42, 109, 0.4);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      outline: none;
+    }
+
+    .btn-gold:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 0 30px rgba(255, 42, 109, 0.7), 0 0 10px rgba(255, 215, 0, 0.5);
+      border-color: #ffd700;
+    }
+
+    .btn-gold:active {
+      transform: translateY(1px);
+    }
+
+    /* Message d'amour */
+    #love-message-section {
+      display: none;
+      animation: fadeIn 0.8s ease forwards;
+    }
+
+    .love-phrase {
+      font-family: 'Cinzel', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(45deg, #ffffff, #ffb3c6, #ffd700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 30px;
+      line-height: 1.4;
+      text-shadow: 0 0 20px rgba(255, 179, 198, 0.3);
+    }
+
+    /* Lecteur Vidéo */
+    #video-container {
+      display: none;
+      margin-top: 15px;
+      animation: fadeIn 0.8s ease forwards;
+    }
+
+    video {
+      width: 100%;
+      max-height: 480px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 42, 109, 0.3);
+      object-fit: cover;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Particules lumineuses (Cœurs & Étoiles) */
+    .particle {
+      position: absolute;
+      pointer-events: none;
+      user-select: none;
+      animation: float 6s infinite ease-in-out;
+      opacity: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(0deg) scale(0.6);
+        opacity: 0;
+      }
+      20% { opacity: 0.8; }
+      80% { opacity: 0.8; }
+      100% {
+        transform: translateY(-10vh) rotate(360deg) scale(1.2);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div id="intro-section">
+      <h1>Un secret pour toi... ✨</h1>
+      <button class="btn-gold" onclick="showLoveMessage()">Découvrir ❤️</button>
+    </div>
+
+    <div id="love-message-section">
+      <p class="love-phrase">Phrase d’Amour du jour</p>
+      <button class="btn-gold" id="start-btn" onclick="startVideo()">▶ START</button>
+    </div>
+
+    <div id="video-container">
+      <video id="myVideo" controls playsinline preload="auto">
+        <source src="video.mp4" type="video/mp4">
+        Votre navigateur ne supporte pas la lecture vidéo.
+      </video>
+    </div>
+  </div>
+
+  <script>
+    function showLoveMessage() {
+      document.getElementById('intro-section').style.display = 'none';
+      document.getElementById('love-message-section').style.display = 'block';
+    }
+
+    function startVideo() {
+      document.getElementById('start-btn').style.display = 'none';
+      const videoContainer = document.getElementById('video-container');
+      const video = document.getElementById('myVideo');
+      
+      videoContainer.style.display = 'block';
+      video.play().catch(err => console.log("Lecture auto bloquée"));
+    }
+
+    // Générateur d'ambiance lumineuse (Cœurs et Étoiles)
+    const symbols = ['✨', '💖', '💫', '🌹', '✦'];
+    
+    function createParticle() {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      particle.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+      particle.style.left = Math.random() * 100 + 'vw';
+      particle.style.fontSize = (Math.random() * 12 + 12) + 'px';
+      particle.style.animationDuration = (Math.random() * 3 + 4) + 's';
+      document.body.appendChild(particle);
+
+      setTimeout(() => { particle.remove(); }, 7000);
+    }
+
+    setInterval(createParticle, 500);
+  </script>
+</body>
+</html>
+
